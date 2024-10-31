@@ -20,7 +20,8 @@ services:
       - my_bridge_network
     volumes:
       - nginx_logs:/servlog
-    entrypoint: ["/bin/bash", "-c", "/servlog/superviser.sh"]
+      - ./superviser.sh:/usr/local/bin/superviser.sh  # monte le .sh
+    entrypoint: ["/bin/bash", "-c", "/usr/local/bin/superviser.sh"]  # lance le script
 
   curl-client:
     image: curlimages/curl
@@ -35,3 +36,4 @@ volumes:
 networks:
   my_bridge_network:
     driver: bridge
+
